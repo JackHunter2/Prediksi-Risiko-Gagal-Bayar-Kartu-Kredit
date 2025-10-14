@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Prediksi - Sistem Analisis Kredit</title>
+    <meta name="description" content="Hasil prediksi risiko gagal bayar kartu kredit">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+<body>
+    <div class="result-box">
+        <!-- Result Icon -->
+        <div class="result-icon">
+            {% if risk_level == 'TINGGI' %}
+                ⚠️
+            {% elif risk_level == 'RENDAH' %}
+                ✅
+            {% else %}
+                ❌
+            {% endif %}
+        </div>
+
+        <h2>{{ result }}</h2>
+        
+        <!-- Risk Badge -->
+        {% if risk_level == 'TINGGI' %}
+            <div class="risk-badge risk-tinggi">⚠️ RISIKO TINGGI</div>
+        {% elif risk_level == 'RENDAH' %}
+            <div class="risk-badge risk-rendah">✓ RISIKO RENDAH</div>
+        {% else %}
+            <div class="risk-badge risk-error">⚠ ERROR</div>
+        {% endif %}
+        
+        <!-- Progress Circle -->
+        <div class="progress-circle">
+            <svg width="150" height="150">
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle class="progress-circle-bg" cx="75" cy="75" r="70"></circle>
+                <circle class="progress-circle-fill" cx="75" cy="75" r="70"></circle>
+            </svg>
+            <div class="progress-text">{{ probability }}%</div>
+        </div>
+        
+        <!-- Probability Info -->
+        <div class="prob">
+            <span class="prob-label">Probabilitas Gagal Bayar</span>
+            <span class="prob-value">{{ probability }}%</span>
+        </div>
+        
+        <!-- Info Text -->
+        {% if risk_level == 'TINGGI' %}
+            <p class="info-text warning">
+                ⚠️ <strong>Perhatian:</strong> Nasabah ini memiliki risiko tinggi untuk gagal bayar. 
+                Disarankan untuk melakukan analisis lebih lanjut, memberikan limit kredit yang lebih rendah, 
+                atau mempertimbangkan opsi kredit alternatif.
+            </p>
+            
+            <!-- Recommendations -->
+            <div class="recommendation">
+                <h4>📋 Rekomendasi Tindakan:</h4>
+                <ul>
+                    <li>Verifikasi ulang riwayat pembayaran nasabah</li>
+                    <li>Pertimbangkan untuk menurunkan limit kredit</li>
+                    <li>Lakukan monitoring pembayaran lebih ketat</li>
+                    <li>Hubungi nasabah untuk diskusi kondisi keuangan</li>
+                </ul>
+            </div>
+        {% elif risk_level == 'RENDAH' %}
+            <p class="info-text success">
+                ✅ <strong>Baik:</strong> Nasabah ini memiliki profil pembayaran yang baik dan risiko gagal bayar yang rendah. 
+                Nasabah ini dapat dipertimbangkan untuk peningkatan limit atau penawaran produk kredit lainnya.
+            </p>
+            
+            <!-- Recommendations -->
+            <div class="recommendation">
+                <h4>📋 Peluang Bisnis:</h4>
+                <ul>
+                    <li>Nasabah potensial untuk peningkatan limit</li>
+                    <li>Tawarkan produk kredit premium</li>
+                    <li>Pertimbangkan program loyalitas</li>
+                    <li>Monitoring rutin untuk mempertahankan kualitas</li>
+                </ul>
+            </div>
+        {% else %}
+            <p class="info-text warning">
+                ❌ <strong>Error:</strong> Terjadi kesalahan dalam proses prediksi. 
+                Silakan periksa kembali data yang diinput atau hubungi administrator sistem.
+            </p>
+        {% endif %}
+        
+        <!-- Action Buttons -->
+        <div class="button-group">
+            <a href="/" class="btn-back">← Kembali ke Halaman Utama</a>
+            <button class="btn-print" id="printBtn">🖨️ Print Hasil</button>
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="{{ url_for('static', filename='js/result.js') }}"></script>
+</body>
+</html>

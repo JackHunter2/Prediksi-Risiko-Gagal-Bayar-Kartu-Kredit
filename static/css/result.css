@@ -1,0 +1,458 @@
+/* ========================================
+   Result Page Styles
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --success-gradient: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+    --danger-gradient: linear-gradient(135deg, #e53935 0%, #f44336 100%);
+    --warning-gradient: linear-gradient(135deg, #fb8c00 0%, #ffa726 100%);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.3);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--primary-gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ========================================
+   Result Container
+   ======================================== */
+.result-box {
+    max-width: 600px;
+    width: 100%;
+    background: #fff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    animation: zoomIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   Result Header
+   ======================================== */
+.result-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: bounceIn 0.8s ease;
+}
+
+@keyframes bounceIn {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+h2 {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* ========================================
+   Risk Badge
+   ======================================== */
+.risk-badge {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    margin: 20px 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: fadeInScale 0.5s ease 0.3s both;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.risk-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.5s;
+}
+
+.risk-badge:hover::before {
+    left: 100%;
+}
+
+.risk-tinggi {
+    background: linear-gradient(135deg, #ffcdd2 0%, #ef9a9a 100%);
+    color: #c62828;
+    border: 3px solid #ef5350;
+    box-shadow: 0 5px 20px rgba(198, 40, 40, 0.3);
+}
+
+.risk-rendah {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+    color: #2e7d32;
+    border: 3px solid #66bb6a;
+    box-shadow: 0 5px 20px rgba(46, 125, 50, 0.3);
+}
+
+.risk-error {
+    background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+    color: #e65100;
+    border: 3px solid #ffa726;
+    box-shadow: 0 5px 20px rgba(230, 81, 0, 0.3);
+}
+
+/* ========================================
+   Probability Display
+   ======================================== */
+.prob {
+    font-size: 18px;
+    color: #666;
+    margin: 30px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.5s ease 0.5s both;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.prob::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-gradient);
+}
+
+.prob-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.prob-value {
+    font-size: 48px;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-top: 10px;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ========================================
+   Progress Circle
+   ======================================== */
+.progress-circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.progress-circle svg {
+    transform: rotate(-90deg);
+}
+
+.progress-circle-bg {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 10;
+}
+
+.progress-circle-fill {
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    animation: fillCircle 1.5s ease forwards 0.5s;
+}
+
+@keyframes fillCircle {
+    to {
+        stroke-dashoffset: calc(440 - (440 * var(--progress)) / 100);
+    }
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: 800;
+    color: #667eea;
+}
+
+/* ========================================
+   Info Text
+   ======================================== */
+.info-text {
+    font-size: 15px;
+    color: #666;
+    margin-top: 25px;
+    line-height: 1.8;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    animation: fadeIn 0.5s ease 0.7s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.info-text.warning {
+    background: #fff3e0;
+    border-left-color: #fb8c00;
+    color: #e65100;
+}
+
+.info-text.success {
+    background: #e8f5e9;
+    border-left-color: #43a047;
+    color: #2e7d32;
+}
+
+/* ========================================
+   Recommendation Box
+   ======================================== */
+.recommendation {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 12px;
+    text-align: left;
+    animation: slideInLeft 0.5s ease 0.9s both;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.recommendation h4 {
+    color: #1565c0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.recommendation ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.recommendation li {
+    padding: 8px 0 8px 25px;
+    position: relative;
+    color: #1976d2;
+}
+
+.recommendation li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #1565c0;
+    font-weight: bold;
+}
+
+/* ========================================
+   Action Buttons
+   ======================================== */
+.button-group {
+    margin-top: 35px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-back,
+.btn-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--primary-gradient);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: var(--transition);
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-back:hover,
+.btn-print:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-print {
+    background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+    box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
+}
+
+.btn-print:hover {
+    box-shadow: 0 6px 25px rgba(67, 160, 71, 0.4);
+}
+
+/* ========================================
+   Confetti Animation (Success)
+   ======================================== */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #667eea;
+    position: absolute;
+    animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 768px) {
+    .result-box {
+        padding: 35px 25px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .result-icon {
+        font-size: 60px;
+    }
+
+    .prob-value {
+        font-size: 36px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-back,
+    .btn-print {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .progress-circle {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+    body {
+        background: white;
+    }
+
+    .result-box {
+        box-shadow: none;
+    }
+
+    .button-group {
+        display: none;
+    }
+}
+

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Risiko Kredit - Sistem Analisis Kredit</title>
+    <meta name="description" content="Sistem prediksi risiko gagal bayar kartu kredit menggunakan Machine Learning">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Menganalisis data...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="main-header">
+            <h2>🧠 Sistem Prediksi Risiko Gagal Bayar Kartu Kredit</h2>
+            <p class="subtitle">Analisis berbasis Machine Learning untuk menilai risiko kredit nasabah</p>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <!-- Info Box -->
+        <div class="info">
+            <span>ℹ️</span>
+            <span>Silakan isi semua data nasabah dengan lengkap untuk prediksi yang akurat. Data akan tersimpan otomatis.</span>
+        </div>
+
+        <form action="/predict" method="post" id="predictionForm">
+            <!-- Data Pribadi -->
+            <div class="form-section">
+                <h3>📋 Data Pribadi</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            Limit Kredit (Rp)
+                            <span class="tooltip-icon">?
+                                <span class="tooltip-text">Batas maksimal kredit yang diberikan kepada nasabah dalam Rupiah</span>
+                            </span>
+                        </label>
+                        <input type="number" name="limit_bal" placeholder="Contoh: 50000" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Usia (Tahun)
+                            <span class="tooltip-icon">?
+                                <span class="tooltip-text">Usia nasabah saat ini (18-100 tahun)</span>
+                            </span>
+                        </label>
+                        <input type="number" name="age" placeholder="Contoh: 30" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select name="sex" required>
+                            <option value="">-- Pilih --</option>
+                            <option value="1">Laki-laki</option>
+                            <option value="2">Perempuan</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pendidikan</label>
+                        <select name="education" required>
+                            <option value="">-- Pilih --</option>
+                            <option value="1">Graduate School</option>
+                            <option value="2">University</option>
+                            <option value="3">High School</option>
+                            <option value="4">Others</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Status Pernikahan</label>
+                        <select name="marriage" required>
+                            <option value="">-- Pilih --</option>
+                            <option value="1">Menikah</option>
+                            <option value="2">Lajang</option>
+                            <option value="3">Lainnya</option>
+                        </select>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Pembayaran (6 bulan) -->
+            <div class="form-section">
+                <h3>💳 Status Pembayaran (6 Bulan Terakhir)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            September
+                            <span class="tooltip-icon">?
+                                <span class="tooltip-text">Status: -2/-1 = bayar tepat waktu, 0 = tidak ada transaksi, 1-8 = terlambat 1-8 bulan</span>
+                            </span>
+                        </label>
+                        <input type="number" name="payment_status_sep" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Agustus
+                            <span class="tooltip-icon">?
+                                <span class="tooltip-text">Status pembayaran di bulan Agustus</span>
+                            </span>
+                        </label>
+                        <input type="number" name="payment_status_aug" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Juli
+                            <span class="tooltip-icon">?
+                                <span class="tooltip-text">Status pembayaran di bulan Juli</span>
+                            </span>
+                        </label>
+                        <input type="number" name="payment_status_jul" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Juni</label>
+                        <input type="number" name="payment_status_jun" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Mei</label>
+                        <input type="number" name="payment_status_may" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>April</label>
+                        <input type="number" name="payment_status_apr" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tagihan (6 bulan) -->
+            <div class="form-section">
+                <h3>📊 Jumlah Tagihan (6 Bulan Terakhir)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tagihan September (Rp)</label>
+                        <input type="number" name="bill_statement_sep" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Tagihan Agustus (Rp)</label>
+                        <input type="number" name="bill_statement_aug" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Tagihan Juli (Rp)</label>
+                        <input type="number" name="bill_statement_jul" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tagihan Juni (Rp)</label>
+                        <input type="number" name="bill_statement_jun" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Tagihan Mei (Rp)</label>
+                        <input type="number" name="bill_statement_may" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Tagihan April (Rp)</label>
+                        <input type="number" name="bill_statement_apr" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pembayaran (6 bulan) -->
+            <div class="form-section">
+                <h3>💰 Jumlah Pembayaran (6 Bulan Terakhir)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Pembayaran September (Rp)</label>
+                        <input type="number" name="previous_payment_sep" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pembayaran Agustus (Rp)</label>
+                        <input type="number" name="previous_payment_aug" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pembayaran Juli (Rp)</label>
+                        <input type="number" name="previous_payment_jul" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Pembayaran Juni (Rp)</label>
+                        <input type="number" name="previous_payment_jun" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pembayaran Mei (Rp)</label>
+                        <input type="number" name="previous_payment_may" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Pembayaran April (Rp)</label>
+                        <input type="number" name="previous_payment_apr" placeholder="0" value="0" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span>🔍 Prediksi Risiko Sekarang</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-buttons">
+        <div class="fab" id="fabExample" title="Isi Contoh Data (F2)" style="background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);">
+            📋
+        </div>
+        <div class="fab" id="fabHelp" title="Bantuan (F1)">
+            ❓
+        </div>
+        <div class="fab" id="fabReset" title="Reset Form (Ctrl+R)">
+            🔄
+        </div>
+    </div>
+
+    <!-- Notification Styles -->
+    <style>
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .notification.show {
+            transform: translateX(0);
+        }
+        .notification.info {
+            background: #2196f3;
+            color: white;
+        }
+        .notification.success {
+            background: #4caf50;
+            color: white;
+        }
+        .notification.error {
+            background: #f44336;
+            color: white;
+        }
+        .notification.warning {
+            background: #ff9800;
+            color: white;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: white;
+            padding: 0;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            margin: 0;
+            color: #667eea;
+        }
+        .modal-close {
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        .modal-close:hover {
+            color: #333;
+        }
+        .modal-body {
+            padding: 25px;
+        }
+        .help-section {
+            margin-bottom: 20px;
+        }
+        .help-section h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .help-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .help-section li {
+            padding: 5px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+        .help-section li strong {
+            color: #333;
+        }
+    </style>
+
+    <!-- External JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

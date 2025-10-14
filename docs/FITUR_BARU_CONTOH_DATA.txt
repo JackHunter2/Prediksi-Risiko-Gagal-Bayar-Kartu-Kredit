@@ -1,0 +1,239 @@
+═══════════════════════════════════════════════════════════════
+  📋 FITUR BARU: PENGISIAN CONTOH DATA OTOMATIS
+═══════════════════════════════════════════════════════════════
+
+🎯 FITUR INI UNTUK APA?
+───────────────────────────────────────────────────────────────
+Fitur ini memungkinkan Anda mengisi form secara OTOMATIS dengan
+data contoh untuk keperluan:
+  • Demo ke klien/dosen
+  • Testing cepat
+  • Pelatihan user baru
+  • Pemahaman pola data
+
+⚡ CARA PAKAI (SUPER MUDAH!)
+───────────────────────────────────────────────────────────────
+
+Metode 1: TOMBOL
+1. Lihat tombol 📋 di KANAN BAWAH layar (warna orange)
+2. Klik tombol tersebut
+3. Pilih contoh yang diinginkan:
+   • ✅ Risiko Rendah (nasabah baik)
+   • ⚠️ Risiko Tinggi (nasabah bermasalah)
+4. Form terisi OTOMATIS dalam 2 detik!
+
+Metode 2: KEYBOARD
+1. Tekan tombol F2 di keyboard
+2. Pilih contoh
+3. Selesai!
+
+📊 DATA CONTOH YANG TERSEDIA
+───────────────────────────────────────────────────────────────
+
+✅ CONTOH 1: RISIKO RENDAH
+   Profil Nasabah:
+   • Limit Kredit: Rp 500.000 (tinggi)
+   • Usia: 35 tahun (dewasa, stabil)
+   • Pendidikan: University
+   • Status: Menikah
+   
+   Riwayat:
+   • Selalu bayar TEPAT WAKTU (-1 di semua bulan)
+   • Bayar PENUH sesuai tagihan
+   • Tidak pernah terlambat
+   
+   Prediksi: RISIKO RENDAH ✅
+   (Probabilitas gagal bayar < 30%)
+
+───────────────────────────────────────────────────────────────
+
+⚠️ CONTOH 2: RISIKO TINGGI
+   Profil Nasabah:
+   • Limit Kredit: Rp 50.000 (rendah)
+   • Usia: 28 tahun
+   • Pendidikan: High School
+   • Status: Lajang
+   
+   Riwayat:
+   • Sering terlambat 2-3 BULAN
+   • Bayar sangat SEDIKIT (Rp 3.000 - 10.000 saja)
+   • Tagihan terus MENUMPUK
+   • Pembayaran tidak konsisten
+   
+   Prediksi: RISIKO TINGGI ⚠️
+   (Probabilitas gagal bayar > 70%)
+
+🎨 FITUR KEREN!
+───────────────────────────────────────────────────────────────
+✨ Animasi pengisian (field terisi satu per satu)
+✨ Bounce effect pada setiap field
+✨ Progress bar update otomatis
+✨ Notifikasi muncul setelah selesai
+✨ Smooth & cepat (2 detik semua terisi!)
+
+💡 USE CASE PRAKTIS
+───────────────────────────────────────────────────────────────
+
+1. DEMO KE DOSEN/KLIEN:
+   "Baik, saya tunjukkan cara kerjanya..."
+   → Klik 📋
+   → Pilih Risiko Rendah
+   → Submit
+   → "Lihat, hasilnya Risiko Rendah"
+   → Reset
+   → Pilih Risiko Tinggi
+   → Submit
+   → "Bandingkan dengan yang ini, Risiko Tinggi"
+   
+   Waktu: 1 menit vs 5 menit isi manual!
+
+2. TESTING DEVELOPER:
+   Tidak perlu isi manual 24 field
+   → Tekan F2
+   → Pilih contoh
+   → Test langsung!
+
+3. PELATIHAN USER:
+   User baru bisa BELAJAR dari contoh
+   Melihat pola data yang benar
+   Memahami korelasi input-output
+
+⌨️ SHORTCUT
+───────────────────────────────────────────────────────────────
+F2          = Buka modal contoh data
+Esc         = Tutup modal
+Click Card  = Pilih & isi otomatis
+
+🎯 STATISTIK
+───────────────────────────────────────────────────────────────
+Isi manual:        2-3 menit
+Dengan fitur ini:  2 detik
+Hemat waktu:       98% lebih cepat!
+Field terisi:      24 field otomatis
+
+📝 PERBANDINGAN
+───────────────────────────────────────────────────────────────
+
+SEBELUM (tanpa fitur ini):
+  ❌ Harus isi manual 24 field
+  ❌ Butuh 2-3 menit
+  ❌ Bisa salah isi
+  ❌ Capek untuk demo berulang
+
+SEKARANG (dengan fitur ini):
+  ✅ Klik 1x, semua terisi
+  ✅ Cuma 2 detik
+  ✅ Data valid & realistic
+  ✅ Demo berkali-kali tanpa capek
+
+🚀 CARA PAKAI UNTUK DEMO
+───────────────────────────────────────────────────────────────
+
+SKENARIO: Demo ke Dosen/Klien
+
+1. Buka aplikasi
+   "Ini adalah sistem prediksi risiko kredit..."
+
+2. Klik tombol 📋
+   "Untuk demo, saya akan gunakan contoh data..."
+
+3. Pilih "Risiko Rendah"
+   "Ini contoh nasabah dengan profil baik..."
+   (Form terisi otomatis dengan animasi keren!)
+
+4. Submit
+   "Dan hasilnya... Risiko Rendah dengan probabilitas X%"
+   (Tunjukkan hasil + rekomendasi)
+
+5. Kembali, klik 📋 lagi
+
+6. Pilih "Risiko Tinggi"
+   "Sekarang kita coba nasabah bermasalah..."
+   (Form terisi otomatis lagi)
+
+7. Submit
+   "Dan hasilnya... Risiko Tinggi dengan probabilitas Y%"
+   "Lihat perbedaannya?"
+
+Total waktu: < 2 menit untuk demo lengkap!
+
+💪 KEUNGGULAN
+───────────────────────────────────────────────────────────────
+
+UNTUK USER:
+✅ Hemat waktu drastis
+✅ Tidak perlu hapal format data
+✅ Bisa langsung lihat hasilnya
+✅ Belajar dari contoh yang benar
+
+UNTUK DEVELOPER:
+✅ Testing super cepat
+✅ Debug lebih mudah
+✅ Demo lebih profesional
+✅ User onboarding lebih baik
+
+UNTUK PRESENTASI:
+✅ Tidak buang waktu isi manual
+✅ Fokus ke penjelasan sistem
+✅ Bisa tunjukkan berbagai skenario
+✅ Audience tidak bosan menunggu
+
+🎓 TIPS PRO
+───────────────────────────────────────────────────────────────
+
+1. Untuk presentasi:
+   → Gunakan shortcut F2 (lebih cepat)
+   → Siapkan tab browser sebelumnya
+   → Jelaskan sambil form terisi otomatis
+
+2. Untuk testing:
+   → Test dulu Risiko Rendah
+   → Catat hasilnya
+   → Test Risiko Tinggi
+   → Bandingkan hasil
+
+3. Untuk belajar:
+   → Lihat data contoh Risiko Rendah
+   → Perhatikan pola pembayarannya
+   → Bandingkan dengan Risiko Tinggi
+   → Pahami perbedaannya
+
+📊 DATA TEKNIS
+───────────────────────────────────────────────────────────────
+
+File yang diupdate:
+  • static/js/main.js (fungsi baru)
+  • templates/index.html (tombol baru)
+
+Fungsi utama:
+  • showExampleModal() - Tampilkan modal
+  • fillExampleData(type) - Isi form
+  
+Animasi:
+  • Stagger 50ms per field
+  • Bounce effect pada setiap input
+  • Progress bar update real-time
+
+🔥 KESIMPULAN
+───────────────────────────────────────────────────────────────
+
+Fitur ini adalah GAME CHANGER untuk:
+  ✨ Demo yang lebih cepat & profesional
+  ✨ Testing yang lebih efisien
+  ✨ User experience yang lebih baik
+  ✨ Presentasi yang lebih lancar
+
+SEKARANG ANDA BISA:
+  • Demo dalam 2 menit vs 10 menit
+  • Test tanpa capek isi manual
+  • Tunjukkan hasil cepat ke audience
+  • Fokus ke penjelasan, bukan pengisian
+
+───────────────────────────────────────────────────────────────
+
+                  🎉 SELAMAT MENCOBA! 🎉
+
+         Klik tombol 📋 dan rasakan bedanya!
+
+═══════════════════════════════════════════════════════════════
+
